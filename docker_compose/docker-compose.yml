@@ -1,0 +1,23 @@
+version: '2'
+services:
+
+    scrapyd:
+        build:
+             context: ./
+             dockerfile: scrapyd.dockerfile
+        volumes:
+          - "/etc/test/scrapyd:/code"
+        ports:
+          - "6800:6800"
+    gerapy:
+        build:
+             context: ./
+             dockerfile: gerapy.dockerfile
+        volumes:
+          - "/etc/test/gerapy:/app/gerapy"
+        depends_on:
+          - scrapyd
+        ports:
+          - "8000:8000"
+
+
